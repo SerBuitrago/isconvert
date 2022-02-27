@@ -2,6 +2,7 @@ package com.isconvert;
 
 import com.isconvert.observer.observer.impl.ObserverSystemBinary;
 import com.isconvert.observer.observer.impl.ObserverSystemDecimal;
+import com.isconvert.observer.observer.impl.ObserverSystemHexadecimal;
 import com.isconvert.observer.subject.SubjectSystem;
 
 import org.springframework.boot.CommandLineRunner;
@@ -17,9 +18,9 @@ public class MainApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		SubjectSystem<Long> subject = new SubjectSystem<>();
-		new ObserverSystemDecimal(subject);
+		SubjectSystem<String> subject = new SubjectSystem<>();
+		new ObserverSystemBinary(subject);
 
-		subject.setStatus(1111L);
+		subject.setStatus("111101010100101010101010");
 	}
 }

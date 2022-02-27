@@ -2,6 +2,12 @@ package com.isconvert.factory.system.impl;
 
 import com.isconvert.factory.system.ISystem;
 
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static com.isconvert.util.SystemUtil.HEXADECIMAL_GROUP;
+import static com.isconvert.util.SystemUtil.toArray;
+
 public class SystemDecimal implements ISystem<Long> {
 
     @Override
@@ -21,6 +27,11 @@ public class SystemDecimal implements ISystem<Long> {
 
     @Override
     public String toHexadecimal(Long number) {
-        return "ss";
+        AtomicReference<String> hexadecimal = new AtomicReference<>("");
+        Arrays.stream(toArray(String.valueOf(number))).forEach(numberIndex -> {
+            Integer index = Integer.parseInt(numberIndex);
+            hexadecimal.updateAndGet(value ->  value + HEXADECIMAL_GROUP[index]);
+        });
+        return hexadecimal.get();
     }
 }

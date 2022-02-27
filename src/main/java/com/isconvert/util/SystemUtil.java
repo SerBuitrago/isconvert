@@ -72,6 +72,14 @@ public class SystemUtil {
         return -1;
     }
 
+    public static String [] toArray(String number){
+        String [] array = new String[number.length()];
+        for(int index= 0; index < number.length(); index++){
+            array[index] = String.valueOf(number.charAt(index));
+        }
+        return array;
+    }
+
     public static String [] countGroupAndAdd(String number, Integer group, String add, boolean isLeft){
         Integer count = countGroup(number.length(), group);
         number = addGroup(number, count, add, isLeft);

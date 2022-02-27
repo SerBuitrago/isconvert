@@ -1,30 +1,37 @@
 package com.isconvert.factory.system.impl;
 
 import com.isconvert.factory.system.ISystem;
+import com.isconvert.factory.system.generic.SystemGeneric;
 
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static com.isconvert.util.SystemUtil.*;
 
-public class SystemBinary implements ISystem<String> {
+public class SystemBinary extends SystemGeneric implements ISystem<String> {
 
     @Override
     public String toBinary(String number) {
-        return number;
+        binary = number;
+        return binary;
     }
 
     @Override
     public Long toOctal(String number) {
-        AtomicReference<String> octal = new AtomicReference<>("");
+        if(octal != null)
+            return octal;
+        test = "";
         Arrays.stream(countGroupAndAdd(number, OCTAL_GROUP_VALUE, ADD_VALUE, true))
-                .forEach(group -> octal.updateAndGet(value -> value + findArray(OCTAL_GROUP, group)));
-        return Long.parseLong(octal.get());
+                .forEach(group -> test+= findArray(OCTAL_GROUP, group));
+        octal = Long.parseLong(test);
+        test = null;
+        return octal;
     }
 
     @Override
     public Long toDecimal(String number) {
-        Long decimal = 0L;
+        if(decimal != null)
+            return decimal;
+        decimal = 0L;
         Double exponent = 0D;
         for(char indexNumber : flip(number).toCharArray())
             decimal += pow(Double.parseDouble(String.valueOf(indexNumber)), exponent++);
@@ -33,13 +40,15 @@ public class SystemBinary implements ISystem<String> {
 
     @Override
     public String toHexadecimal(String number) {
-        AtomicReference<String> hexadecimal = new AtomicReference<>("");
+        if(hexadecimal != null)
+            return  hexadecimal;
+        hexadecimal = "";
         Arrays.stream(countGroupAndAdd(number, HEXADECIMAL_GROUP_VALUE, ADD_VALUE, true))
                 .forEach(group -> {
                     Integer index = findArray(HEXADECIMAL_GROUP, group);
-                    hexadecimal.updateAndGet(value -> value + HEXADECIMAL_VALUE.charAt(index));
+                    hexadecimal += HEXADECIMAL_VALUE.charAt(index);
                 });
-        return hexadecimal.get();
+        return hexadecimal;
     }
 
     private Long pow(Double base, Double exponent){
