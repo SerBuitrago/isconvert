@@ -1,26 +1,50 @@
 package com.isconvert.factory.system.impl;
 
 import com.isconvert.factory.system.ISystem;
+import com.isconvert.factory.system.generic.SystemGeneric;
 
-public class SystemOctal implements ISystem<Long> {
+import java.util.Arrays;
+
+import static com.isconvert.util.SystemUtil.*;
+
+public class SystemOctal extends SystemGeneric implements ISystem<Long> {
+
+    private final SystemBinary systemBinary;
+
+    public SystemOctal(){
+        systemBinary= new SystemBinary();
+    }
 
     @Override
     public String toBinary(Long number) {
-        return null;
+        if(binary != null)
+            return binary;
+        binary = "";
+        Arrays.stream(toArray(String.valueOf(number))).forEach(numberIndex -> {
+            Integer index = OCTAL_VALUE.indexOf(numberIndex);
+            binary += OCTAL_GROUP[index];
+        });
+        return binary;
     }
 
     @Override
     public Long toOctal(Long number) {
-        return null;
+        return number;
     }
 
     @Override
     public Long toDecimal(Long number) {
-        return null;
+        if(decimal != null)
+            return decimal;
+        decimal = systemBinary.toDecimal(toBinary(number));
+        return decimal;
     }
 
     @Override
     public String toHexadecimal(Long number) {
-        return null;
+        if(hexadecimal != null)
+            return hexadecimal;
+        hexadecimal = systemBinary.toHexadecimal(toBinary(number));
+        return hexadecimal;
     }
 }
