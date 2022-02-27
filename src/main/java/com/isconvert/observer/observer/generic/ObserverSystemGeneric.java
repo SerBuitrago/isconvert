@@ -15,7 +15,7 @@ public abstract class ObserverSystemGeneric<T> extends ObserverSystem<T> {
     }
 
     @Override
-    public void update() {
+    public void update() throws Exception {
         if(!isValid())
             return;
         FactorySystem<T> factory = new FactorySystem<>();

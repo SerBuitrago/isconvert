@@ -25,6 +25,12 @@ public class SubjectSystem<T> {
     }
 
     public void notification(){
-        observers.forEach(observer -> observer.update());
+        observers.forEach(observer -> {
+            try {
+                observer.update();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

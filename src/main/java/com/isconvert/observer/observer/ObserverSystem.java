@@ -8,5 +8,5 @@ public abstract class ObserverSystem<T> {
     protected SubjectSystem<T> subject;
     protected FactorySystemType systemType;
 
-    public abstract void  update();
+    public abstract void  update() throws Exception;
 }
