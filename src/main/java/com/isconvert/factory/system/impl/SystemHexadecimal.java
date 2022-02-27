@@ -45,7 +45,6 @@ public class SystemHexadecimal extends SystemGeneric implements ISystem<String>{
 
     @Override
     public String toHexadecimal(String number) {
-        hexadecimal = number;
-        return hexadecimal;
+        return number;
     }
 }

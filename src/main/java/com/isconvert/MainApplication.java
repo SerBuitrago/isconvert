@@ -18,9 +18,9 @@ public class MainApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		SubjectSystem<String> subject = new SubjectSystem<>();
-		new ObserverSystemBinary(subject);
+		SubjectSystem<Long> subject = new SubjectSystem<>();
+		new ObserverSystemDecimal(subject);
 
-		subject.setStatus("111101010100101010101010");
+		subject.setStatus(31189389L);
 	}
 }

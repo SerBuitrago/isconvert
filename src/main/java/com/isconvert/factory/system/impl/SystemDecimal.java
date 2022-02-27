@@ -1,23 +1,37 @@
 package com.isconvert.factory.system.impl;
 
 import com.isconvert.factory.system.ISystem;
+import com.isconvert.factory.system.generic.SystemGeneric;
 
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicReference;
 
-import static com.isconvert.util.SystemUtil.HEXADECIMAL_GROUP;
-import static com.isconvert.util.SystemUtil.toArray;
+import static com.isconvert.util.SystemUtil.*;
 
-public class SystemDecimal implements ISystem<Long> {
+public class SystemDecimal extends SystemGeneric implements ISystem<Long> {
+
+    private final SystemBinary systemBinary;
+
+    public SystemDecimal(){
+        systemBinary= new SystemBinary();
+    }
 
     @Override
     public String toBinary(Long number) {
-        return "Hola";
+        if(binary != null)
+            return binary;
+        binary = "";
+        while (number > 0){
+            binary = (number % BINARY_BASE) +binary;
+            number/=BINARY_BASE;
+        }
+        return binary;
     }
 
     @Override
     public Long toOctal(Long number) {
-        return number;
+        if(octal != null)
+            return octal;
+        octal =  systemBinary.toOctal(toBinary(number));
+        return octal;
     }
 
     @Override
@@ -27,11 +41,9 @@ public class SystemDecimal implements ISystem<Long> {
 
     @Override
     public String toHexadecimal(Long number) {
-        AtomicReference<String> hexadecimal = new AtomicReference<>("");
-        Arrays.stream(toArray(String.valueOf(number))).forEach(numberIndex -> {
-            Integer index = Integer.parseInt(numberIndex);
-            hexadecimal.updateAndGet(value ->  value + HEXADECIMAL_GROUP[index]);
-        });
-        return hexadecimal.get();
+        if(hexadecimal != null)
+            return hexadecimal;
+        hexadecimal = systemBinary.toHexadecimal(toBinary(number));
+        return hexadecimal;
     }
 }

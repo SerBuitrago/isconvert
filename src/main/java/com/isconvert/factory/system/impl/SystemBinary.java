@@ -11,8 +11,7 @@ public class SystemBinary extends SystemGeneric implements ISystem<String> {
 
     @Override
     public String toBinary(String number) {
-        binary = number;
-        return binary;
+        return number;
     }
 
     @Override
