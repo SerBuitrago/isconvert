@@ -1,16 +1,21 @@
 package com.isconvert.factory;
 
+import static com.isconvert.util.SystemUtil.*;
+
 public enum FactorySystemType {
 
-    BINARY(2),
-    TERNARY(3),
-    OCTAL(8),
-    DECIMAL(10),
-    HEXADECIMAL(16);
+    BINARY(BINARY_BASE),
+    OCTAL(OCTAL_BASE),
+    DECIMAL(DECIMAL_BASE),
+    HEXADECIMAL(HEXADECIMAL_BASE);
 
     private Integer base;
 
     FactorySystemType(Integer base){
         this.base = base;
+    }
+
+    public Integer getBase(){
+        return base;
     }
 }

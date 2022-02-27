@@ -1,7 +1,7 @@
 package com.isconvert.factory;
 
-import com.isconvert.system.ISystem;
-import com.isconvert.system.impl.*;
+import com.isconvert.factory.system.ISystem;
+import com.isconvert.factory.system.impl.*;
 
 public class FactorySystem<T> {
 
@@ -12,9 +12,6 @@ public class FactorySystem<T> {
         switch (systemType){
             case BINARY:
                 system = (ISystem<T>) new SystemBinary();
-                break;
-            case TERNARY:
-                system = (ISystem<T>) new SystemTernary();
                 break;
             case OCTAL:
                 system = (ISystem<T>) new SystemOctal();

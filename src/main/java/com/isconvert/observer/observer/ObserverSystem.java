@@ -1,7 +1,7 @@
-package com.isconvert.start.observer;
+package com.isconvert.observer.observer;
 
 import com.isconvert.factory.FactorySystemType;
-import com.isconvert.start.subject.SubjectSystem;
+import com.isconvert.observer.subject.SubjectSystem;
 
 public abstract class ObserverSystem<T> {
 
